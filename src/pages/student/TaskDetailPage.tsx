@@ -9,6 +9,7 @@ import { SubmissionPanel } from "@/components/submission/SubmissionPanel";
 import { ErrorState } from "@/components/states/ErrorState";
 import { PanelSkeleton } from "@/components/states/LoadingState";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { Markdown } from "@/components/shared/Markdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SUBMISSION_TYPE_META } from "@/lib/difficulty";
@@ -122,20 +123,14 @@ export function TaskDetailPage() {
                     {task.description && (
                         <section className="panel p-5 sm:p-6">
                             <h2 className="eyebrow mb-3">About this task</h2>
-                            <p className="text-foreground text-sm leading-relaxed text-pretty">{task.description}</p>
+                            <Markdown content={task.description} />
                         </section>
                     )}
 
                     <section className="panel p-5 sm:p-6">
                         <h2 className="eyebrow mb-4">Instructions</h2>
                         {task.instructions ? (
-                            <div className="prose-invert space-y-4">
-                                {task.instructions.split(/\n{2,}/).map((para, i) => (
-                                    <p key={i} className="text-foreground/90 text-sm leading-relaxed">
-                                        {para}
-                                    </p>
-                                ))}
-                            </div>
+                            <Markdown content={task.instructions} />
                         ) : (
                             <p className="text-muted-foreground text-sm">No additional instructions for this task.</p>
                         )}

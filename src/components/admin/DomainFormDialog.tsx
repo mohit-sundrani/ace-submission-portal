@@ -94,7 +94,7 @@ export function DomainFormDialog({ open, onOpenChange, domain, defaultOrder, onS
                         {errors.name && <p className="text-error text-sm">{errors.name}</p>}
                     </div>
                     <div className="space-y-1.5">
-                        <Label htmlFor="d-desc">Description</Label>
+                        <Label htmlFor="d-desc">Instructions</Label>
                         <Textarea
                             id="d-desc"
                             value={description}
@@ -102,6 +102,9 @@ export function DomainFormDialog({ open, onOpenChange, domain, defaultOrder, onS
                             placeholder="What students do inside this domain."
                             rows={3}
                         />
+                        <p className="text-muted-foreground text-xs">
+                            Markdown supported. Line breaks are preserved as typed.
+                        </p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1.5">

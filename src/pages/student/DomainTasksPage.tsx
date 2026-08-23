@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/states/EmptyState";
 import { ErrorState } from "@/components/states/ErrorState";
 import { PanelSkeleton } from "@/components/states/LoadingState";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { Markdown } from "@/components/shared/Markdown";
 import { DifficultyBadge } from "@/components/shared/DifficultyBadge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -93,9 +94,7 @@ export function DomainTasksPage() {
                             </span>
                         </Badge>
                     </div>
-                    {domain.description && (
-                        <p className="text-muted-foreground max-w-2xl text-sm text-pretty">{domain.description}</p>
-                    )}
+                    {domain.description && <Markdown content={domain.description} className="max-w-2xl" />}
                     <div className="border-border flex flex-wrap items-center gap-4 border-t pt-4">
                         <span className="eyebrow">Difficulty</span>
                         <div className="flex flex-wrap items-center gap-2">

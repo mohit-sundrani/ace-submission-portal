@@ -116,6 +116,9 @@ export function TaskFormDialog({ open, onOpenChange, domainId, task, defaultOrde
                             placeholder="One or two lines shown on the task card."
                             rows={2}
                         />
+                        <p className="text-muted-foreground text-xs">
+                            Markdown supported. Line breaks are preserved as typed.
+                        </p>
                     </div>
 
                     <div className="space-y-1.5">
@@ -125,10 +128,14 @@ export function TaskFormDialog({ open, onOpenChange, domainId, task, defaultOrde
                             value={instructions}
                             onChange={(e) => setInstructions(e.target.value)}
                             placeholder={
-                                "What students must do, step by step.\nUse blank lines to separate paragraphs."
+                                "What students must do, step by step.\n\nMarkdown is supported:\n- Bullet lists\n**Bold**, *italic*, `code`\n[Links](https://example.com)\n1. Numbered steps"
                             }
                             rows={7}
                         />
+                        <p className="text-muted-foreground text-xs">
+                            Markdown supported - headings, lists, bold, code and links. Line breaks are preserved
+                            exactly as pasted.
+                        </p>
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2">

@@ -26,9 +26,6 @@ export function DomainCard({ domain, taskCount }: DomainCardProps) {
             <h3 className="font-heading text-foreground group-hover:text-electric mt-4 text-lg leading-snug font-medium transition-colors duration-150">
                 {domain.name}
             </h3>
-            {domain.description && (
-                <p className="text-muted-foreground mt-1.5 line-clamp-2 text-sm text-pretty">{domain.description}</p>
-            )}
             <div className="border-border text-muted-foreground group-hover:text-electric mt-5 flex items-center gap-1.5 border-t pt-4 font-mono text-[0.6875rem] font-medium tracking-[0.05em] uppercase transition-colors duration-150">
                 Open domain
                 <ArrowRight
