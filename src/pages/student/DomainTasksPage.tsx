@@ -85,7 +85,7 @@ export function DomainTasksPage() {
 
                 <div className="mt-3 flex flex-col gap-3">
                     <div className="flex flex-wrap items-center gap-3">
-                        <h1 className="font-heading text-foreground text-2xl leading-snug font-medium tracking-tight text-balance sm:text-3xl">
+                        <h1 className="font-heading text-foreground text-2xl leading-snug font-medium tracking-tight text-balance uppercase sm:text-3xl">
                             {domain.name}
                         </h1>
                         <Badge variant="neutral" className="gap-2">

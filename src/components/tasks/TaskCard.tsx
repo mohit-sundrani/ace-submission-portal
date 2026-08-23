@@ -34,14 +34,11 @@ export function TaskCard({ task, status, position, total }: TaskCardProps) {
 
             <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-heading text-foreground group-hover:text-electric text-base leading-snug font-medium transition-colors duration-150">
+                    <h3 className="font-heading text-foreground group-hover:text-electric text-base leading-snug font-medium uppercase transition-colors duration-150">
                         {task.name}
                     </h3>
                     <DifficultyBadge difficulty={task.difficulty} />
                 </div>
-                {task.description && (
-                    <p className="text-muted-foreground mt-1 line-clamp-2 text-sm text-pretty">{task.description}</p>
-                )}
             </div>
 
             <div className="flex shrink-0 items-center justify-between gap-4 sm:flex-col sm:items-end sm:gap-2">
