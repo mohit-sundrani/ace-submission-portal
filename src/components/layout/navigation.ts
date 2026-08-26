@@ -4,6 +4,7 @@ import {
     LayoutDashboard,
     Layers,
     ShieldCheck,
+    User,
     ClipboardCheck,
     UsersRound,
     Eye,
@@ -95,6 +96,7 @@ export const iconMap: Record<string, LucideIcon> = {
     graduation: GraduationCap,
     send: Send,
     allusers: Users,
+    user: User,
 };
 
 export function labelForPath(pathname: string): string {
