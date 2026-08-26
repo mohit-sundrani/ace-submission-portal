@@ -71,10 +71,10 @@ export default function App() {
                             <Route element={<RequireAdmin />}>
                                 <Route path="domains" element={<AdminDomains />} />
                                 <Route path="domains/:domainId" element={<AdminTasks />} />
-                                <Route path="announcements" element={<AdminAnnouncements />} />
-                                <Route path="faqs" element={<AdminFAQs />} />
                             </Route>
                             <Route element={<RequireOwner />}>
+                                <Route path="announcements" element={<AdminAnnouncements />} />
+                                <Route path="faqs" element={<AdminFAQs />} />
                                 <Route path="users" element={<AdminUsers />} />
                             </Route>
                         </Route>

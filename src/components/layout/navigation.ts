@@ -49,6 +49,13 @@ export const adminNav: NavSection[] = [
         items: [{ label: "Student Portal", to: "/app/domains", icon: "graduation" }],
     },
     {
+        label: "Info",
+        items: [
+            { label: "Announcements", to: "/app/announcements", icon: "megaphone" },
+            { label: "FAQs", to: "/app/faqs", icon: "help" },
+        ],
+    },
+    {
         label: "Account",
         items: [{ label: "My Profile", to: "/admin/profile", icon: "user" }],
     },
@@ -66,15 +73,15 @@ export const ownerNav: NavSection[] = [
         ],
     },
     {
-        label: "Student Portal",
-        items: [{ label: "Student Portal", to: "/app/domains", icon: "graduation" }],
-    },
-    {
         label: "Content",
         items: [
             { label: "Announcements", to: "/admin/announcements", icon: "megaphone" },
             { label: "FAQs", to: "/admin/faqs", icon: "help" },
         ],
+    },
+    {
+        label: "Student Portal",
+        items: [{ label: "Student Portal", to: "/app/domains", icon: "graduation" }],
     },
     {
         label: "Account",
@@ -94,6 +101,13 @@ export const mentorNav: NavSection[] = [
     {
         label: "Student Portal",
         items: [{ label: "Student Portal", to: "/app/domains", icon: "graduation" }],
+    },
+    {
+        label: "Info",
+        items: [
+            { label: "Announcements", to: "/app/announcements", icon: "megaphone" },
+            { label: "FAQs", to: "/app/faqs", icon: "help" },
+        ],
     },
     {
         label: "Account",
