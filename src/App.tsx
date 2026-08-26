@@ -16,7 +16,7 @@ import { SubmissionsPage } from "@/pages/student/SubmissionsPage";
 import { AdminOverview } from "@/pages/admin/AdminOverview";
 import { AdminDomains } from "@/pages/admin/AdminDomains";
 import { AdminTasks } from "@/pages/admin/AdminTasks";
-import { AdminReviews } from "@/pages/admin/AdminReviews";
+import { AdminSubmissions } from "@/pages/admin/AdminSubmissions";
 import { AdminInterviews } from "@/pages/admin/AdminInterviews";
 import { AdminUsers } from "@/pages/admin/AdminUsers";
 import { NotFoundPage } from "@/pages/NotFound";
@@ -60,7 +60,7 @@ export default function App() {
                         <Route path="/admin" element={<AppShell />}>
                             <Route index element={<AdminOverview />} />
                             <Route path="profile" element={<ProfilePage />} />
-                            <Route path="reviews" element={<AdminReviews />} />
+                            <Route path="submissions" element={<AdminSubmissions />} />
                             <Route path="interviews" element={<AdminInterviews />} />
                             <Route element={<RequireAdmin />}>
                                 <Route path="domains" element={<AdminDomains />} />

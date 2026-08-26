@@ -50,7 +50,7 @@ export function Topbar({ onOpenMobileNav, onOpenPalette, onToggleCollapse }: Top
                     aria-label="Open command palette"
                 >
                     <Search className="size-3.5" aria-hidden="true" />
-                    <span className="text-muted-foreground/80 flex-1 text-left text-xs">Jump to…</span>
+                    <span className="text-muted-foreground/80 flex-1 text-left text-xs">Jump to...</span>
                     <kbd className="text-muted-foreground font-mono text-[0.625rem]">⌘K</kbd>
                 </button>
                 <Button variant="ghost" size="icon" className="sm:hidden" onClick={onOpenPalette} aria-label="Search">

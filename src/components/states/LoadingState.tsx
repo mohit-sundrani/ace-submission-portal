@@ -21,7 +21,7 @@ export function TableSkeleton({ rows = 5 }: { rows?: number }) {
                     <Skeleton className="ml-auto h-4 w-20" />
                 </div>
             ))}
-            <span className="sr-only">Loading content…</span>
+            <span className="sr-only">Loading content...</span>
         </div>
     );
 }
@@ -35,7 +35,7 @@ export function PanelSkeleton({ className }: { className?: string }) {
                 <Skeleton className="h-9 w-full" />
                 <Skeleton className="h-9 w-2/3" />
             </div>
-            <span className="sr-only">Loading…</span>
+            <span className="sr-only">Loading...</span>
         </div>
     );
 }
@@ -53,7 +53,7 @@ export function StatSkeleton({ count = 4 }: { count?: number }) {
                     <Skeleton className="mt-3 h-8 w-24" />
                 </div>
             ))}
-            <span className="sr-only">Loading…</span>
+            <span className="sr-only">Loading...</span>
         </div>
     );
 }

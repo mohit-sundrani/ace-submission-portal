@@ -35,7 +35,6 @@ export function DomainsPage() {
     return (
         <div className="page py-8">
             <PageHeader
-                crumbs={[{ label: "Student" }, { label: "Domains" }]}
                 title="Choose your domain"
                 description="Each domain holds a set of tasks of increasing difficulty. Pick one to see what’s waiting."
             />

@@ -219,20 +219,19 @@ export function AdminInterviews() {
     return (
         <div className="page py-8">
             <PageHeader
-                crumbs={[{ label: "Admin", to: "/admin" }, { label: "Interviews" }]}
                 title="Interview panel"
                 description="Students shortlisted for an interview - track interviews, final selection and notes."
                 actions={
                     <>
-                        <Link to="/admin/reviews">
+                        <Link to="/admin/submissions">
                             <Button variant="secondary">
                                 <ClipboardCheck className="size-4" aria-hidden="true" />
-                                Reviews
+                                Submissions
                             </Button>
                         </Link>
                         <Button onClick={handleExport} loading={exporting}>
                             <Download className="size-4" aria-hidden="true" />
-                            {exporting ? "Exporting…" : "Export CSV"}
+                            {exporting ? "Exporting..." : "Export CSV"}
                         </Button>
                     </>
                 }
@@ -271,7 +270,7 @@ export function AdminInterviews() {
                                     id="iv-search"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder="Name, email, phone…"
+                                    placeholder="Name, email, phone..."
                                     className="pl-8"
                                 />
                             </div>
@@ -286,10 +285,10 @@ export function AdminInterviews() {
                             icon={UsersRound}
                             eyebrow="No interviews"
                             title="Nobody shortlisted yet"
-                            description="Mark submissions as selected for interview in Reviews - they appear here grouped by domain."
+                            description="Mark submissions as selected for interview in Submissions - they appear here grouped by domain."
                             action={
-                                <Link to="/admin/reviews">
-                                    <Button variant="secondary">Open Reviews</Button>
+                                <Link to="/admin/submissions">
+                                    <Button variant="secondary">Open Submissions</Button>
                                 </Link>
                             }
                         />
@@ -423,7 +422,7 @@ export function AdminInterviews() {
                             rows={6}
                             value={notesDraft}
                             onChange={(e) => setNotesDraft(e.target.value)}
-                            placeholder="Add private interview notes for this student…"
+                            placeholder="Add private interview notes for this student..."
                         />
                         <div className="flex justify-end">
                             <Button onClick={handleSaveNotes} loading={notesBusy}>

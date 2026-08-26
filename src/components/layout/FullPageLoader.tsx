@@ -19,7 +19,7 @@ export function FullPageLoader() {
                     <Skeleton className="h-24 w-full" />
                 </div>
             </div>
-            <span className="sr-only">Loading…</span>
+            <span className="sr-only">Loading...</span>
         </div>
     );
 }

@@ -7,7 +7,6 @@ import { TaskCard } from "@/components/tasks/TaskCard";
 import { EmptyState } from "@/components/states/EmptyState";
 import { ErrorState } from "@/components/states/ErrorState";
 import { PanelSkeleton } from "@/components/states/LoadingState";
-import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { Markdown } from "@/components/shared/Markdown";
 import { DifficultyBadge } from "@/components/shared/DifficultyBadge";
 import { Badge } from "@/components/ui/badge";
@@ -75,13 +74,6 @@ export function DomainTasksPage() {
                     <ArrowLeft className="size-4" aria-hidden="true" />
                     All domains
                 </Button>
-                <Breadcrumbs
-                    items={[
-                        { label: "Student", to: "/app/domains" },
-                        { label: "Domains", to: "/app/domains" },
-                        { label: domain.name },
-                    ]}
-                />
 
                 <div className="mt-3 flex flex-col gap-3">
                     <div className="flex flex-wrap items-center gap-3">
@@ -102,9 +94,6 @@ export function DomainTasksPage() {
                             <DifficultyBadge difficulty="medium" />
                             <DifficultyBadge difficulty="hard" />
                             <DifficultyBadge difficulty="extreme" />
-                            <span className="text-muted-foreground hidden font-mono text-[0.625rem] tracking-[0.05em] uppercase sm:inline">
-                                Work through them in order - each level builds on the last.
-                            </span>
                         </div>
                     </div>
                 </div>

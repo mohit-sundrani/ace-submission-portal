@@ -56,11 +56,7 @@ export function SubmissionsPage() {
 
     return (
         <div className="page py-8">
-            <PageHeader
-                crumbs={[{ label: "Student" }, { label: "My Submissions" }]}
-                title="My Submissions"
-                description="A summary of all your submissions across every domain."
-            />
+            <PageHeader title="My Submissions" description="A summary of all your submissions across every domain." />
 
             {loading && (
                 <div className="space-y-3">

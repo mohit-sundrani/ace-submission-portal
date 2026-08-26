@@ -124,7 +124,7 @@ export function SubmissionReviewCard({
                             value={notes}
                             onChange={(e) => setNotes(e.target.value)}
                             disabled={busy}
-                            placeholder="Add private admin notes for this submission…"
+                            placeholder="Add notes for this submission..."
                         />
                         {dirty && (
                             <Button size="sm" onClick={handleSaveNotes} disabled={busy} loading={busy}>

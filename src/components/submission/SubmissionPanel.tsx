@@ -206,9 +206,9 @@ export function SubmissionPanel({ task, existing, onSuccess }: SubmissionPanelPr
                 >
                     <CloudUpload className="size-4" aria-hidden="true" />
                     {phase === "uploading"
-                        ? "Uploading PDF…"
+                        ? "Uploading PDF..."
                         : phase === "submitting"
-                          ? "Submitting…"
+                          ? "Submitting..."
                           : phase === "failed"
                             ? "Try again"
                             : "Submit work"}

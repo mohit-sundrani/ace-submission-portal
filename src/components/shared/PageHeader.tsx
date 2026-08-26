@@ -1,17 +1,13 @@
-import { Breadcrumbs, type Crumb } from "./Breadcrumbs";
-
 interface PageHeaderProps {
-    crumbs: Crumb[];
     title: string;
     description?: string;
     actions?: React.ReactNode;
 }
 
-export function PageHeader({ crumbs, title, description, actions }: PageHeaderProps) {
+export function PageHeader({ title, description, actions }: PageHeaderProps) {
     return (
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="min-w-0">
-                <Breadcrumbs items={crumbs} />
                 <div className="mt-2.5 flex items-baseline gap-3">
                     <h1 className="font-heading text-foreground text-2xl leading-snug font-medium tracking-tight text-balance sm:text-3xl">
                         {title}

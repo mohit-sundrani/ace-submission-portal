@@ -63,11 +63,7 @@ export function AdminUsers() {
 
     return (
         <div className="page py-8">
-            <PageHeader
-                crumbs={[{ label: "Owner" }, { label: "Users" }]}
-                title="User Management"
-                description="View all registered students and manage their roles."
-            />
+            <PageHeader title="User Management" description="View all registered students and manage their roles." />
 
             {error && !loading && <ErrorState message={error} onRetry={refetch} />}
             {loading && !error && <StatSkeleton />}

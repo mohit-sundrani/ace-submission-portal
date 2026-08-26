@@ -34,7 +34,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             base.push(
                 { label: "Admin overview", to: "/admin", group: "Admin", icon: LayoutDashboard },
                 { label: "Manage domains", to: "/admin/domains", group: "Admin", icon: Layers },
-                { label: "Review submissions", to: "/admin/reviews", group: "Admin", icon: ClipboardCheck },
+                { label: "Review submissions", to: "/admin/submissions", group: "Admin", icon: ClipboardCheck },
                 { label: "Interview panel", to: "/admin/interviews", group: "Admin", icon: UsersRound },
                 { label: "My profile", to: "/admin/profile", group: "Admin", icon: User },
                 { label: "Browse student portal", to: "/app/domains", group: "Student Portal", icon: GraduationCap }
@@ -45,7 +45,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
         } else if (role === "mentor") {
             base.push(
                 { label: "Mentor overview", to: "/admin", group: "Mentor", icon: LayoutDashboard },
-                { label: "Review submissions", to: "/admin/reviews", group: "Mentor", icon: ClipboardCheck },
+                { label: "Review submissions", to: "/admin/submissions", group: "Mentor", icon: ClipboardCheck },
                 { label: "Interview panel", to: "/admin/interviews", group: "Mentor", icon: UsersRound },
                 { label: "My profile", to: "/admin/profile", group: "Mentor", icon: User },
                 { label: "Browse student portal", to: "/app/domains", group: "Student Portal", icon: GraduationCap }
@@ -129,7 +129,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={onKeyDown}
-                        placeholder="Jump to a page…"
+                        placeholder="Jump to a page..."
                         role="combobox"
                         aria-expanded="true"
                         aria-controls="palette-results"

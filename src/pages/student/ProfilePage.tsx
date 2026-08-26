@@ -21,9 +21,6 @@ export function ProfilePage() {
     const navigate = useNavigate();
     const location = useLocation();
     const isAdminOrMentor = location.pathname.startsWith("/admin");
-    const homeCrumb = isAdminOrMentor
-        ? { label: ROLE_LABEL[profile?.role ?? "admin"], to: "/admin" }
-        : { label: "Student", to: "/app/domains" };
     const complete = profile ? isProfileComplete(profile) : false;
 
     if (loading || profile === null) return <PanelSkeleton className="mx-auto mt-8 max-w-3xl" />;
@@ -31,7 +28,6 @@ export function ProfilePage() {
     return (
         <div className="page py-8">
             <PageHeader
-                crumbs={[homeCrumb, { label: "My profile" }]}
                 title={complete ? "My Profile" : "Complete your profile"}
                 description={
                     complete

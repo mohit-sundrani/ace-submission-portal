@@ -87,7 +87,6 @@ export function AdminDomains() {
     return (
         <div className="page py-8">
             <PageHeader
-                crumbs={[{ label: "Admin", to: "/admin" }, { label: "Domains" }]}
                 title="Domains"
                 description="Create, edit, reorder and show/hide the domains students choose from."
                 actions={

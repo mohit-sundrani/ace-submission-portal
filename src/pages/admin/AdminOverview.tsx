@@ -36,7 +36,6 @@ export function AdminOverview() {
     return (
         <div className="page py-8">
             <PageHeader
-                crumbs={[{ label: "Admin" }, { label: "Overview" }]}
                 title="Overview"
                 description="Manage domains and tasks, review student submissions, and run the interview pipeline."
                 actions={
@@ -83,7 +82,7 @@ export function AdminOverview() {
                             <ChevronRight className="text-muted-foreground size-4" aria-hidden="true" />
                         </Link>
                         <Link
-                            to="/admin/reviews"
+                            to="/admin/submissions"
                             className="panel group hover:border-muted-foreground/40 flex items-center gap-4 p-5 transition-all duration-150"
                         >
                             <ClipboardCheck
@@ -93,7 +92,7 @@ export function AdminOverview() {
                             />
                             <div className="flex-1">
                                 <p className="text-foreground group-hover:text-electric text-sm font-medium">
-                                    Review &amp; interviews
+                                    Submissions &amp; interviews
                                 </p>
                                 <p className="text-muted-foreground text-xs">
                                     Shortlist submissions, track interviews and selections, export the panel.

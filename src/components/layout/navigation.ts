@@ -3,7 +3,6 @@ import type { LucideIcon } from "lucide-react";
 import {
     LayoutDashboard,
     Layers,
-    User,
     ShieldCheck,
     ClipboardCheck,
     UsersRound,
@@ -11,6 +10,7 @@ import {
     GraduationCap,
     Send,
     Users,
+    MessagesSquare,
 } from "lucide-react";
 
 export const studentNav: NavSection[] = [
@@ -30,8 +30,8 @@ export const adminNav: NavSection[] = [
         items: [
             { label: "Overview", to: "/admin", icon: "dashboard", end: true },
             { label: "Domains", to: "/admin/domains", icon: "layers" },
-            { label: "Reviews", to: "/admin/reviews", icon: "clipboard" },
-            { label: "Interviews", to: "/admin/interviews", icon: "users" },
+            { label: "Submissions", to: "/admin/submissions", icon: "clipboard" },
+            { label: "Interviews", to: "/admin/interviews", icon: "messages" },
         ],
     },
     {
@@ -50,8 +50,8 @@ export const ownerNav: NavSection[] = [
         items: [
             { label: "Overview", to: "/admin", icon: "dashboard", end: true },
             { label: "Domains", to: "/admin/domains", icon: "layers" },
-            { label: "Reviews", to: "/admin/reviews", icon: "clipboard" },
-            { label: "Interviews", to: "/admin/interviews", icon: "users" },
+            { label: "Submissions", to: "/admin/submissions", icon: "clipboard" },
+            { label: "Interviews", to: "/admin/interviews", icon: "messages" },
             { label: "Users", to: "/admin/users", icon: "allusers" },
         ],
     },
@@ -70,8 +70,8 @@ export const mentorNav: NavSection[] = [
         label: "Mentor",
         items: [
             { label: "Overview", to: "/admin", icon: "dashboard", end: true },
-            { label: "Reviews", to: "/admin/reviews", icon: "clipboard" },
-            { label: "Interviews", to: "/admin/interviews", icon: "users" },
+            { label: "Submissions", to: "/admin/submissions", icon: "clipboard" },
+            { label: "Interviews", to: "/admin/interviews", icon: "messages" },
         ],
     },
     {
@@ -87,7 +87,7 @@ export const mentorNav: NavSection[] = [
 export const iconMap: Record<string, LucideIcon> = {
     dashboard: LayoutDashboard,
     layers: Layers,
-    user: User,
+    messages: MessagesSquare,
     shield: ShieldCheck,
     clipboard: ClipboardCheck,
     users: UsersRound,
@@ -100,7 +100,7 @@ export const iconMap: Record<string, LucideIcon> = {
 export function labelForPath(pathname: string): string {
     if (pathname.startsWith("/admin")) {
         if (pathname === "/admin" || pathname === "/admin/") return "Overview";
-        if (pathname.startsWith("/admin/reviews")) return "Reviews";
+        if (pathname.startsWith("/admin/submissions")) return "Submissions";
         if (pathname.startsWith("/admin/interviews")) return "Interviews";
         if (pathname.startsWith("/admin/domains")) return "Domains";
         if (pathname.startsWith("/admin/users")) return "Users";

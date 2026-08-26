@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
  *     persistent private admin notes
  *   • stat cells - total students, total submissions, top submitted tasks
  */
-export function AdminReviews() {
+export function AdminSubmissions() {
     const { data, loading, error, refetch } = useAdminReviewData();
 
     // Filters
@@ -150,8 +150,7 @@ export function AdminReviews() {
     return (
         <div className="page py-8">
             <PageHeader
-                crumbs={[{ label: "Admin", to: "/admin" }, { label: "Reviews" }]}
-                title="Reviews"
+                title="Submissions"
                 description="All students with submissions - shortlist tasks for interview and leave private notes."
                 actions={
                     <Link to="/admin/interviews">
@@ -181,7 +180,7 @@ export function AdminReviews() {
                                 <ul className="mt-2 space-y-1.5">
                                     {topTasks.map(([name, count]) => (
                                         <li key={name} className="flex items-center justify-between gap-3">
-                                            <span className="text-foreground truncate text-sm">{name}</span>
+                                            <span className="text-foreground truncate text-sm uppercase">{name}</span>
                                             <span className="text-electric shrink-0 font-mono text-xs">{count}</span>
                                         </li>
                                     ))}
@@ -203,7 +202,7 @@ export function AdminReviews() {
                                         id="rv-search"
                                         value={search}
                                         onChange={(e) => setSearch(e.target.value)}
-                                        placeholder="Name, email, phone, course…"
+                                        placeholder="Name, email, phone, course..."
                                         className="pl-8"
                                     />
                                 </div>
