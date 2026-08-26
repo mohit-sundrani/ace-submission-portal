@@ -18,18 +18,18 @@ import {
 
 export const studentNav: NavSection[] = [
     {
-        label: "Student",
-        items: [
-            { label: "Domains", to: "/app/domains", icon: "layers", end: true },
-            { label: "Submissions", to: "/app/submissions", icon: "send" },
-            { label: "My Profile", to: "/app/profile", icon: "user" },
-        ],
-    },
-    {
         label: "Info",
         items: [
             { label: "Announcements", to: "/app/announcements", icon: "megaphone" },
             { label: "FAQs", to: "/app/faqs", icon: "help" },
+        ],
+    },
+    {
+        label: "Dashboard",
+        items: [
+            { label: "Domains", to: "/app/domains", icon: "layers", end: true },
+            { label: "Submissions", to: "/app/submissions", icon: "send" },
+            { label: "My Profile", to: "/app/profile", icon: "user" },
         ],
     },
 ];
@@ -42,13 +42,6 @@ export const adminNav: NavSection[] = [
             { label: "Domains", to: "/admin/domains", icon: "layers" },
             { label: "Submissions", to: "/admin/submissions", icon: "clipboard" },
             { label: "Interviews", to: "/admin/interviews", icon: "messages" },
-        ],
-    },
-    {
-        label: "Content",
-        items: [
-            { label: "Announcements", to: "/admin/announcements", icon: "megaphone" },
-            { label: "FAQs", to: "/admin/faqs", icon: "help" },
         ],
     },
     {
@@ -73,15 +66,15 @@ export const ownerNav: NavSection[] = [
         ],
     },
     {
+        label: "Student Portal",
+        items: [{ label: "Student Portal", to: "/app/domains", icon: "graduation" }],
+    },
+    {
         label: "Content",
         items: [
             { label: "Announcements", to: "/admin/announcements", icon: "megaphone" },
             { label: "FAQs", to: "/admin/faqs", icon: "help" },
         ],
-    },
-    {
-        label: "Student Portal",
-        items: [{ label: "Student Portal", to: "/app/domains", icon: "graduation" }],
     },
     {
         label: "Account",
