@@ -12,6 +12,8 @@ import {
     Send,
     Users,
     MessagesSquare,
+    Megaphone,
+    HelpCircle,
 } from "lucide-react";
 
 export const studentNav: NavSection[] = [
@@ -21,6 +23,13 @@ export const studentNav: NavSection[] = [
             { label: "Domains", to: "/app/domains", icon: "layers", end: true },
             { label: "Submissions", to: "/app/submissions", icon: "send" },
             { label: "My Profile", to: "/app/profile", icon: "user" },
+        ],
+    },
+    {
+        label: "Info",
+        items: [
+            { label: "Announcements", to: "/app/announcements", icon: "megaphone" },
+            { label: "FAQs", to: "/app/faqs", icon: "help" },
         ],
     },
 ];
@@ -33,6 +42,13 @@ export const adminNav: NavSection[] = [
             { label: "Domains", to: "/admin/domains", icon: "layers" },
             { label: "Submissions", to: "/admin/submissions", icon: "clipboard" },
             { label: "Interviews", to: "/admin/interviews", icon: "messages" },
+        ],
+    },
+    {
+        label: "Content",
+        items: [
+            { label: "Announcements", to: "/admin/announcements", icon: "megaphone" },
+            { label: "FAQs", to: "/admin/faqs", icon: "help" },
         ],
     },
     {
@@ -54,6 +70,13 @@ export const ownerNav: NavSection[] = [
             { label: "Submissions", to: "/admin/submissions", icon: "clipboard" },
             { label: "Interviews", to: "/admin/interviews", icon: "messages" },
             { label: "Users", to: "/admin/users", icon: "allusers" },
+        ],
+    },
+    {
+        label: "Content",
+        items: [
+            { label: "Announcements", to: "/admin/announcements", icon: "megaphone" },
+            { label: "FAQs", to: "/admin/faqs", icon: "help" },
         ],
     },
     {
@@ -97,6 +120,8 @@ export const iconMap: Record<string, LucideIcon> = {
     send: Send,
     allusers: Users,
     user: User,
+    megaphone: Megaphone,
+    help: HelpCircle,
 };
 
 export function labelForPath(pathname: string): string {
@@ -113,6 +138,8 @@ export function labelForPath(pathname: string): string {
         if (pathname.startsWith("/app/domains")) return "Domains";
         if (pathname.startsWith("/app/submissions")) return "My Submissions";
         if (pathname.startsWith("/app/profile")) return "My Profile";
+        if (pathname.startsWith("/app/announcements")) return "Announcements";
+        if (pathname.startsWith("/app/faqs")) return "FAQs";
         return "Student";
     }
     return "ACE";

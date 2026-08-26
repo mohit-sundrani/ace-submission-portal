@@ -68,6 +68,26 @@ export interface InterviewRecord {
     updated_at: string;
 }
 
+export interface Announcement {
+    id: string;
+    title: string;
+    content: string;
+    is_pinned: boolean;
+    is_visible: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface FAQ {
+    id: string;
+    question: string;
+    answer: string;
+    display_order: number;
+    is_visible: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface NavItem {
     label: string;
     to: string;

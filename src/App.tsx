@@ -13,12 +13,16 @@ import { DomainsPage } from "@/pages/student/DomainsPage";
 import { DomainTasksPage } from "@/pages/student/DomainTasksPage";
 import { TaskDetailPage } from "@/pages/student/TaskDetailPage";
 import { SubmissionsPage } from "@/pages/student/SubmissionsPage";
+import { AnnouncementsPage } from "@/pages/student/AnnouncementsPage";
+import { FAQsPage } from "@/pages/student/FAQsPage";
 import { AdminOverview } from "@/pages/admin/AdminOverview";
 import { AdminDomains } from "@/pages/admin/AdminDomains";
 import { AdminTasks } from "@/pages/admin/AdminTasks";
 import { AdminSubmissions } from "@/pages/admin/AdminSubmissions";
 import { AdminInterviews } from "@/pages/admin/AdminInterviews";
 import { AdminUsers } from "@/pages/admin/AdminUsers";
+import { AdminAnnouncements } from "@/pages/admin/AdminAnnouncements";
+import { AdminFAQs } from "@/pages/admin/AdminFAQs";
 import { NotFoundPage } from "@/pages/NotFound";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -51,6 +55,8 @@ export default function App() {
                             <Route path="domains/:domainId" element={<DomainTasksPage />} />
                             <Route path="domains/:domainId/tasks/:taskId" element={<TaskDetailPage />} />
                             <Route path="submissions" element={<SubmissionsPage />} />
+                            <Route path="announcements" element={<AnnouncementsPage />} />
+                            <Route path="faqs" element={<FAQsPage />} />
                         </Route>
                     </Route>
                 </Route>
@@ -65,6 +71,8 @@ export default function App() {
                             <Route element={<RequireAdmin />}>
                                 <Route path="domains" element={<AdminDomains />} />
                                 <Route path="domains/:domainId" element={<AdminTasks />} />
+                                <Route path="announcements" element={<AdminAnnouncements />} />
+                                <Route path="faqs" element={<AdminFAQs />} />
                             </Route>
                             <Route element={<RequireOwner />}>
                                 <Route path="users" element={<AdminUsers />} />
