@@ -309,7 +309,11 @@ export function AdminSubmissions() {
                                                     <td className="px-5 py-4 whitespace-nowrap">
                                                         <Badge variant="neutral">
                                                             {p.course
-                                                                ? `${p.course} - ${ordinal(studyYearFromEnrollment(p.enrollment_no))} Year`
+                                                                ? `${p.course} - ${ordinal(
+                                                                      /^\d{11}$/.test(p.enrollment_no?.trim() ?? "")
+                                                                          ? studyYearFromEnrollment(p.enrollment_no)
+                                                                          : 1
+                                                                  )} Year`
                                                                 : "-"}
                                                         </Badge>
                                                     </td>
