@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { cn, formatDateTime } from "@/lib/utils";
+import { DifficultyBadge } from "@/components/shared/DifficultyBadge";
 
 interface SubmissionReviewCardProps {
     submission: ReviewSubmissionView;
@@ -66,6 +67,7 @@ export function SubmissionReviewCard({
                     <p className="text-foreground text-sm font-medium">{submission.task_name}</p>
                     <p className="text-muted-foreground mt-1 flex flex-wrap items-center gap-2 font-mono text-[0.625rem] tracking-[0.05em] uppercase">
                         <Badge variant="neutral">{submission.domain_name}</Badge>
+                        <DifficultyBadge difficulty={submission.difficulty} />
                         <span>{formatDateTime(submission.submitted_at)}</span>
                         {submission.status === "failed" && <Badge variant="error">Failed</Badge>}
                     </p>

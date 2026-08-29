@@ -1,6 +1,6 @@
 import { useFetch } from "./useFetch";
 import { supabase } from "@/lib/supabase";
-import type { Domain, InterviewRecord, Profile, Submission, Task } from "@/lib/types";
+import type { Difficulty, Domain, InterviewRecord, Profile, Submission, Task } from "@/lib/types";
 
 /**
  * Admin review + interview data (ported from admintable-old).
@@ -24,6 +24,7 @@ export interface ReviewSubmissionView {
     admin_notes: string | null;
     task_name: string;
     domain_name: string;
+    difficulty: Difficulty;
 }
 
 export interface AdminReviewData {
@@ -38,11 +39,11 @@ export async function fetchAdminReviewData(): Promise<AdminReviewData> {
     const [profilesRes, domainsRes, tasksRes, subsRes, recordsRes] = await Promise.all([
         supabase
             .from("profiles")
-            .select("id, full_name, email, phone, course")
+            .select("id, full_name, email, phone, enrollment_no, course")
             .eq("role", "student")
             .order("full_name"),
         supabase.from("domains").select("id, name, description, display_order, is_visible").order("display_order"),
-        supabase.from("tasks").select("id, domain_id, name").order("display_order"),
+        supabase.from("tasks").select("id, domain_id, name, difficulty").order("display_order"),
         supabase.from("submissions").select("*").order("submitted_at", { ascending: false }),
         supabase.from("interview_records").select("*"),
     ]);
@@ -60,6 +61,7 @@ export async function fetchAdminReviewData(): Promise<AdminReviewData> {
         admin_notes: s.admin_notes ?? null,
         task_name: taskMap.get(s.task_id)?.name ?? "Deleted task",
         domain_name: domainMap.get(s.domain_id)?.name ?? "Deleted domain",
+        difficulty: taskMap.get(s.task_id)?.difficulty ?? "medium",
     }));
 
     return {

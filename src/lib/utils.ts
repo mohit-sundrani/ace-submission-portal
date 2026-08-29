@@ -55,3 +55,31 @@ export function truncateMiddle(value: string, max = 42): string {
     const half = Math.floor((max - 3) / 2);
     return `${value.slice(0, half)}...${value.slice(-half)}`;
 }
+
+export function ordinal(n: number): string {
+    const mod100 = Math.abs(n) % 100;
+    const suffix =
+        mod100 >= 11 && mod100 <= 13
+            ? "th"
+            : mod100 % 10 === 1
+              ? "st"
+              : mod100 % 10 === 2
+                ? "nd"
+                : mod100 % 10 === 3
+                  ? "rd"
+                  : "th";
+    return `${n}${suffix}`;
+}
+
+/**
+ * Current year of study (1/2/3/...) derived from an 11-digit enrollment
+ * number whose last two digits are the admission year. Students who don't
+ * have an enrollment number yet (new admits) fall back to 1st year.
+ */
+export function studyYearFromEnrollment(enrollmentNo: string | null | undefined): number {
+    const match = (enrollmentNo ?? "").trim().match(/(\d{2})$/);
+    if (!match) return 1;
+    const admissionYear = Number(match[1]);
+    const currentYear = new Date().getFullYear() % 100;
+    return Math.max(1, currentYear - admissionYear + 1);
+}

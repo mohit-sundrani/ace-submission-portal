@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, ordinal, studyYearFromEnrollment } from "@/lib/utils";
 
 /**
  * Review pipeline (ported from admintable-old Dashboard):
@@ -307,7 +307,11 @@ export function AdminSubmissions() {
                                                         </span>
                                                     </td>
                                                     <td className="px-5 py-4 whitespace-nowrap">
-                                                        <Badge variant="neutral">{p.course || "-"}</Badge>
+                                                        <Badge variant="neutral">
+                                                            {p.course
+                                                                ? `${p.course} - ${ordinal(studyYearFromEnrollment(p.enrollment_no))} Year`
+                                                                : "-"}
+                                                        </Badge>
                                                     </td>
                                                     <td className="px-5 py-4 whitespace-nowrap">
                                                         <span className="text-foreground font-mono text-sm">
@@ -351,12 +355,12 @@ export function AdminSubmissions() {
                     </DialogHeader>
                     {dialog && (
                         <div className="max-h-[60vh] space-y-3 overflow-y-auto pr-1">
-                            {(byStudent.get(dialog.student_id) ?? []).length === 0 ? (
+                            {matchingSubmissions(byStudent.get(dialog.student_id) ?? []).length === 0 ? (
                                 <p className="text-muted-foreground py-8 text-center text-sm">
-                                    No submissions for this student.
+                                    No submissions match the current filters.
                                 </p>
                             ) : (
-                                (byStudent.get(dialog.student_id) ?? []).map((sub) => (
+                                matchingSubmissions(byStudent.get(dialog.student_id) ?? []).map((sub) => (
                                     <SubmissionReviewCard
                                         key={sub.id}
                                         submission={sub}
