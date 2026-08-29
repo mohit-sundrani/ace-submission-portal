@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, ordinal, studyYearFromEnrollment } from "@/lib/utils";
 
 /**
  * Interview panel (ported from admintable-old Report):
@@ -37,6 +37,7 @@ interface InterviewRow {
     email: string;
     phone: string;
     course: string;
+    enrollment_no: string;
     domain_name: string;
     submissions: ReviewSubmissionView[];
     interview_done: boolean;
@@ -88,7 +89,13 @@ export function AdminInterviews() {
                 existing.submissions.push(s);
                 continue;
             }
-            const p = profileById.get(s.student_id) ?? { full_name: "", email: "", phone: "", course: "" };
+            const p = profileById.get(s.student_id) ?? {
+                full_name: "",
+                email: "",
+                phone: "",
+                course: "",
+                enrollment_no: "",
+            };
             const d = domainById.get(s.domain_id) ?? { name: "Deleted domain" };
             map.set(key, {
                 student_id: s.student_id,
@@ -97,6 +104,7 @@ export function AdminInterviews() {
                 email: p.email ?? "",
                 phone: p.phone ?? "",
                 course: p.course ?? "",
+                enrollment_no: p.enrollment_no ?? "",
                 domain_name: d.name ?? "",
                 submissions: [s],
                 interview_done: false,
@@ -326,7 +334,13 @@ export function AdminInterviews() {
                                                             {row.full_name || "-"}
                                                         </p>
                                                         <p className="text-muted-foreground font-mono text-[0.625rem] tracking-[0.05em] uppercase">
-                                                            {row.course || "-"}
+                                                            {row.course
+                                                                ? `${row.course} - ${ordinal(
+                                                                      /^\d{11}$/.test(row.enrollment_no?.trim() ?? "")
+                                                                          ? studyYearFromEnrollment(row.enrollment_no)
+                                                                          : 1
+                                                                  )} Year`
+                                                                : "-"}
                                                         </p>
                                                     </div>
                                                 </div>
