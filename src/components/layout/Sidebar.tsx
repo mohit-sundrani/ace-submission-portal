@@ -3,6 +3,7 @@ import { GraduationCap, LogOut, X } from "lucide-react";
 import { iconMap, studentNav, adminNav, mentorNav, ownerNav } from "./navigation";
 import type { NavSection } from "@/lib/types";
 import { useAuth } from "@/context/AuthContext";
+import { useCounts } from "@/hooks/useCounts";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -16,10 +17,12 @@ function NavSectionBlock({
     section,
     collapsed,
     onNavigate,
+    counts,
 }: {
     section: NavSection;
     collapsed: boolean;
     onNavigate?: () => void;
+    counts: Record<string, number>;
 }) {
     const location = useLocation();
     return (
@@ -30,6 +33,12 @@ function NavSectionBlock({
                     const Icon = iconMap[item.icon] ?? GraduationCap;
                     const active =
                         item.end !== false ? location.pathname === item.to : location.pathname.startsWith(item.to);
+                    const count =
+                        (item.to === "/app/announcements" || item.to === "/admin/announcements")
+                            ? counts.announcements
+                            : (item.to === "/app/faqs" || item.to === "/admin/faqs")
+                                ? counts.faqs
+                                : 0;
                     return (
                         <Link
                             key={item.to}
@@ -51,7 +60,16 @@ function NavSectionBlock({
                                 />
                             )}
                             <Icon className="size-5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
-                            {!collapsed && <span className="truncate">{item.label}</span>}
+                            {!collapsed && (
+                                <>
+                                    <span className="truncate">{item.label}</span>
+                                    {count > 0 && (
+                                        <span className="bg-electric/15 text-electric ml-auto flex size-5 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-semibold">
+                                            {count > 99 ? "99+" : count}
+                                        </span>
+                                    )}
+                                </>
+                            )}
                         </Link>
                     );
                 })}
@@ -63,6 +81,7 @@ function NavSectionBlock({
 export function Sidebar({ collapsed, mobileOpen, onMobileClose }: SidebarProps) {
     const { session, role, profile, signOut } = useAuth();
     const navigate = useNavigate();
+    const counts = useCounts();
     const nav = role === "owner" ? ownerNav : role === "admin" ? adminNav : role === "mentor" ? mentorNav : studentNav;
 
     const handleSignOut = async () => {
@@ -95,7 +114,7 @@ export function Sidebar({ collapsed, mobileOpen, onMobileClose }: SidebarProps) 
 
             <div className="flex-1 space-y-6 overflow-y-auto px-3 py-5">
                 {nav.map((section, i) => (
-                    <NavSectionBlock key={i} section={section} collapsed={collapsed} onNavigate={onMobileClose} />
+                    <NavSectionBlock key={i} section={section} collapsed={collapsed} onNavigate={onMobileClose} counts={counts} />
                 ))}
             </div>
 
