@@ -1,7 +1,7 @@
 import * as React from "react";
 import { supabase } from "@/lib/supabase";
 
-interface Counts {
+export interface Counts {
     announcements: number;
     faqs: number;
 }
@@ -26,7 +26,9 @@ export function useCounts(): Counts {
         }
 
         fetch();
-        return () => { cancelled = true; };
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     return counts;

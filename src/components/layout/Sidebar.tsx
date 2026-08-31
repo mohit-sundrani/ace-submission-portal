@@ -3,7 +3,7 @@ import { GraduationCap, LogOut, X } from "lucide-react";
 import { iconMap, studentNav, adminNav, mentorNav, ownerNav } from "./navigation";
 import type { NavSection } from "@/lib/types";
 import { useAuth } from "@/context/AuthContext";
-import { useCounts } from "@/hooks/useCounts";
+import { useCounts, type Counts } from "@/hooks/useCounts";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -22,7 +22,7 @@ function NavSectionBlock({
     section: NavSection;
     collapsed: boolean;
     onNavigate?: () => void;
-    counts: Record<string, number>;
+    counts: Counts;
 }) {
     const location = useLocation();
     return (
@@ -34,11 +34,11 @@ function NavSectionBlock({
                     const active =
                         item.end !== false ? location.pathname === item.to : location.pathname.startsWith(item.to);
                     const count =
-                        (item.to === "/app/announcements" || item.to === "/admin/announcements")
+                        item.to === "/app/announcements" || item.to === "/admin/announcements"
                             ? counts.announcements
-                            : (item.to === "/app/faqs" || item.to === "/admin/faqs")
-                                ? counts.faqs
-                                : 0;
+                            : item.to === "/app/faqs" || item.to === "/admin/faqs"
+                              ? counts.faqs
+                              : 0;
                     return (
                         <Link
                             key={item.to}
@@ -114,7 +114,13 @@ export function Sidebar({ collapsed, mobileOpen, onMobileClose }: SidebarProps) 
 
             <div className="flex-1 space-y-6 overflow-y-auto px-3 py-5">
                 {nav.map((section, i) => (
-                    <NavSectionBlock key={i} section={section} collapsed={collapsed} onNavigate={onMobileClose} counts={counts} />
+                    <NavSectionBlock
+                        key={i}
+                        section={section}
+                        collapsed={collapsed}
+                        onNavigate={onMobileClose}
+                        counts={counts}
+                    />
                 ))}
             </div>
 
