@@ -1,35 +1,38 @@
 import * as React from "react";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
+import { loadReadAnnouncementIds, ANNOUNCEMENT_READ_EVENT } from "@/hooks/useAnnouncementRead";
 
 export interface Counts {
     announcements: number;
-    faqs: number;
 }
 
 export function useCounts(): Counts {
-    const [counts, setCounts] = React.useState<Counts>({ announcements: 0, faqs: 0 });
+    const { session } = useAuth();
+    const userId = session?.user?.id;
+    const [counts, setCounts] = React.useState<Counts>({ announcements: 0 });
 
     React.useEffect(() => {
         let cancelled = false;
 
-        async function fetch() {
-            const [annRes, faqRes] = await Promise.all([
-                supabase.from("announcements").select("id", { count: "exact", head: true }).eq("is_visible", true),
-                supabase.from("faqs").select("id", { count: "exact", head: true }).eq("is_visible", true),
-            ]);
-            if (!cancelled) {
-                setCounts({
-                    announcements: annRes.count ?? 0,
-                    faqs: faqRes.count ?? 0,
-                });
-            }
+        async function fetchCounts() {
+            const annRes = await supabase
+                .from("announcements")
+                .select("id", { count: "exact", head: true })
+                .eq("is_visible", true);
+            if (cancelled) return;
+            const total = annRes.count ?? 0;
+            const unread = Math.max(0, total - loadReadAnnouncementIds(userId).size);
+            setCounts({ announcements: unread });
         }
 
-        fetch();
+        fetchCounts();
+        window.addEventListener(ANNOUNCEMENT_READ_EVENT, fetchCounts);
         return () => {
             cancelled = true;
+            window.removeEventListener(ANNOUNCEMENT_READ_EVENT, fetchCounts);
         };
-    }, []);
+    }, [userId]);
 
     return counts;
 }

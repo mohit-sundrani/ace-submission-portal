@@ -36,9 +36,7 @@ function NavSectionBlock({
                     const count =
                         item.to === "/app/announcements" || item.to === "/admin/announcements"
                             ? counts.announcements
-                            : item.to === "/app/faqs" || item.to === "/admin/faqs"
-                              ? counts.faqs
-                              : 0;
+                            : 0;
                     return (
                         <Link
                             key={item.to}

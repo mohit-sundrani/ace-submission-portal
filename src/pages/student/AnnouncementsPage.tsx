@@ -1,14 +1,15 @@
-import { Megaphone, Pin } from "lucide-react";
+import { Megaphone, Pin, ChevronDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import type { Announcement } from "@/lib/types";
 import { useFetch } from "@/hooks/useFetch";
+import { useAnnouncementRead } from "@/hooks/useAnnouncementRead";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Markdown } from "@/components/shared/Markdown";
 import { EmptyState } from "@/components/states/EmptyState";
 import { ErrorState } from "@/components/states/ErrorState";
 import { PanelSkeleton } from "@/components/states/LoadingState";
 import { Badge } from "@/components/ui/badge";
-import { formatRelativeTime } from "@/lib/utils";
+import { cn, formatRelativeTime } from "@/lib/utils";
 import * as React from "react";
 
 async function fetchAnnouncements(): Promise<Announcement[]> {
@@ -25,8 +26,13 @@ async function fetchAnnouncements(): Promise<Announcement[]> {
 export function AnnouncementsPage() {
     const { data, loading, error, refetch } = useFetch(fetchAnnouncements, []);
     const [expanded, setExpanded] = React.useState<string | null>(null);
+    const { markRead, pruneRead } = useAnnouncementRead();
 
     const announcements = data ?? [];
+
+    React.useEffect(() => {
+        pruneRead(new Set(announcements.map((a) => a.id)));
+    }, [announcements, pruneRead]);
 
     return (
         <div className="page py-8">
@@ -60,18 +66,23 @@ export function AnnouncementsPage() {
                 <div className="space-y-3">
                     {announcements.map((a) => (
                         <div key={a.id} className="panel overflow-hidden">
-                            <div className="flex items-start gap-3 px-5 py-4">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const isExpanded = expanded === a.id;
+                                    setExpanded(isExpanded ? null : a.id);
+                                    if (!isExpanded) markRead(a.id);
+                                }}
+                                aria-expanded={expanded === a.id}
+                                aria-controls={`announcement-${a.id}`}
+                                className="hover:bg-secondary/60 flex w-full items-center gap-3 px-5 py-4 text-left transition-colors"
+                            >
                                 <div className="min-w-0 flex-1">
                                     <div className="flex items-center gap-2">
                                         {a.is_pinned && (
                                             <Pin className="text-electric size-3.5 shrink-0" aria-label="Pinned" />
                                         )}
-                                        <button
-                                            onClick={() => setExpanded(expanded === a.id ? null : a.id)}
-                                            className="text-foreground hover:text-electric text-left text-sm font-medium"
-                                        >
-                                            {a.title}
-                                        </button>
+                                        <span className="text-foreground text-sm font-medium">{a.title}</span>
                                         {a.is_pinned && (
                                             <Badge variant="primary" className="text-[0.625rem]">
                                                 Pinned
@@ -82,9 +93,16 @@ export function AnnouncementsPage() {
                                         {formatRelativeTime(a.created_at)}
                                     </span>
                                 </div>
-                            </div>
+                                <ChevronDown
+                                    className={cn(
+                                        "text-muted-foreground size-4 shrink-0 transition-transform duration-200",
+                                        expanded === a.id && "rotate-180"
+                                    )}
+                                    aria-hidden="true"
+                                />
+                            </button>
                             {expanded === a.id && (
-                                <div className="border-border border-t px-5 py-4">
+                                <div id={`announcement-${a.id}`} className="border-border border-t px-5 py-4">
                                     <Markdown content={a.content} />
                                 </div>
                             )}
