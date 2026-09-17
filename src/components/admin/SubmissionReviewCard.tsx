@@ -10,8 +10,10 @@ import { DifficultyBadge } from "@/components/shared/DifficultyBadge";
 
 interface SubmissionReviewCardProps {
     submission: ReviewSubmissionView;
-    /** Reviews page: allow toggling "selected for interview" + editing notes. */
-    editable?: boolean;
+    /** Allow toggling "selected for interview" for this submission. */
+    selectionEditable?: boolean;
+    /** Allow editing the private per-submission notes. */
+    notesEditable?: boolean;
     pdfUrl?: string | null;
     /** Disable the "select for interview" toggle (student already rejected). */
     disableSelection?: boolean;
@@ -26,7 +28,8 @@ interface SubmissionReviewCardProps {
  */
 export function SubmissionReviewCard({
     submission,
-    editable = false,
+    selectionEditable = false,
+    notesEditable = false,
     pdfUrl,
     disableSelection = false,
     onSelectedChange,
@@ -62,7 +65,8 @@ export function SubmissionReviewCard({
         <div
             className={cn(
                 "border-border rounded-sm border p-4",
-                editable && "hover:border-muted-foreground/40 transition-colors duration-150"
+                (selectionEditable || notesEditable) &&
+                    "hover:border-muted-foreground/40 transition-colors duration-150"
             )}
         >
             <div className="flex flex-wrap items-start justify-between gap-2">
@@ -103,41 +107,45 @@ export function SubmissionReviewCard({
                 )}
             </div>
 
-            {editable && (
+            {(selectionEditable || notesEditable) && (
                 <div className="border-border mt-4 space-y-3 border-t pt-3">
-                    <label className="flex cursor-pointer items-center gap-2">
-                        <Checkbox
-                            checked={submission.selected_for_interview}
-                            onCheckedChange={(v) => handleSelected(v === true)}
-                            disabled={busy || disableSelection}
-                        />
-                        <span
-                            className={cn(
-                                "text-sm font-medium",
-                                submission.selected_for_interview ? "text-success" : "text-foreground"
-                            )}
-                        >
-                            {submission.selected_for_interview
-                                ? "Selected for interview"
-                                : "Not selected for interview"}
-                        </span>
-                    </label>
+                    {selectionEditable && (
+                        <label className="flex cursor-pointer items-center gap-2">
+                            <Checkbox
+                                checked={submission.selected_for_interview}
+                                onCheckedChange={(v) => handleSelected(v === true)}
+                                disabled={busy || disableSelection}
+                            />
+                            <span
+                                className={cn(
+                                    "text-sm font-medium",
+                                    submission.selected_for_interview ? "text-success" : "text-foreground"
+                                )}
+                            >
+                                {submission.selected_for_interview
+                                    ? "Selected for interview"
+                                    : "Not selected for interview"}
+                            </span>
+                        </label>
+                    )}
 
-                    <div className="space-y-1.5">
-                        <Textarea
-                            rows={3}
-                            value={notes}
-                            onChange={(e) => setNotes(e.target.value)}
-                            disabled={busy}
-                            placeholder="Add notes for this submission..."
-                        />
-                        {dirty && (
-                            <Button size="sm" onClick={handleSaveNotes} disabled={busy} loading={busy}>
-                                <Save className="size-4" aria-hidden="true" />
-                                Save note
-                            </Button>
-                        )}
-                    </div>
+                    {notesEditable && (
+                        <div className="space-y-1.5">
+                            <Textarea
+                                rows={3}
+                                value={notes}
+                                onChange={(e) => setNotes(e.target.value)}
+                                disabled={busy}
+                                placeholder="Add notes for this submission..."
+                            />
+                            {dirty && (
+                                <Button size="sm" onClick={handleSaveNotes} disabled={busy} loading={busy}>
+                                    <Save className="size-4" aria-hidden="true" />
+                                    Save note
+                                </Button>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
         </div>

@@ -73,8 +73,10 @@ export interface InterviewRecord {
 export interface PortalSettings {
     /** Single-row table guard - always true. */
     id: boolean;
-    /** When false, mentors cannot shortlist submissions or edit review notes. */
-    mentor_review_enabled: boolean;
+    /** When false, mentors cannot shortlist submissions for interview. */
+    mentor_selection_enabled: boolean;
+    /** When false, mentors cannot edit private per-submission review notes. */
+    mentor_notes_enabled: boolean;
     created_at: string;
     updated_at: string;
 }

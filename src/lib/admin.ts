@@ -22,8 +22,11 @@ export async function setStudentRejected(studentId: string, rejected: boolean): 
     if (error) throw error;
 }
 
-export async function setMentorReviewEnabled(enabled: boolean): Promise<void> {
-    const { error } = await supabase.from("portal_settings").update({ mentor_review_enabled: enabled }).eq("id", true);
+export async function updatePortalSettings(patch: {
+    mentor_selection_enabled?: boolean;
+    mentor_notes_enabled?: boolean;
+}): Promise<void> {
+    const { error } = await supabase.from("portal_settings").update(patch).eq("id", true);
     if (error) throw error;
 }
 
